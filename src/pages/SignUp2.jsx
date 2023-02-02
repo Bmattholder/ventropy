@@ -1,29 +1,24 @@
 import { useState } from 'react';
 
-function SignUp() {
-  const [formData, setFormData] = useState({
+function SignUp2() {
+  const [formData, whateverIWant] = useState({
     name: '',
     email: '',
-    urMomGay: '',
-    noU: '',
+    password: '',
+    confirm: '',
   });
 
-  const { name, email, urMomGay, noU } = formData;
+  const { name, email, password, confirm } = formData;
 
   const onChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
+    whateverIWant((asshole) => ({
+      ...asshole,
       [e.target.name]: e.target.value,
     }));
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-
-    if (urMomGay !== noU) {
-      alert('No uuu');
-      return;
-    }
 
     console.log(formData);
   };
@@ -35,44 +30,40 @@ function SignUp() {
           type='text'
           name='name'
           id='name'
-          placeHolder='Name'
           value={name}
+          placeholder='Name'
           onChange={onChange}
-          required
         />
         <input
-          type='email'
+          type='emai'
           name='email'
           id='email'
-          placeHolder='Email'
           value={email}
+          placeholder='Email'
           onChange={onChange}
-          required
         />
         <input
           type='password'
-          name='urMomGay'
-          id='urMomGay'
-          placeHolder='Password'
-          value={urMomGay}
+          name='password'
+          id='password'
+          value={password}
+          placeholder='Password'
           onChange={onChange}
-          required
         />
         <input
           type='password'
-          name='noU'
-          id='noU'
-          placeHolder='Confirm Password'
-          value={noU}
+          name='confirm'
+          id='confirm'
+          value={confirm}
+          placeholder='Confirm Password'
           onChange={onChange}
-          required
         />
         <button type='submit'>Submit</button>
       </form>
 
-      {name.length >= 4 ? <h1>Hello, {name} </h1> : <></>}
+      {name.length >= 4 ? <h1>Sup, {name} </h1> : <></>}
     </>
   );
 }
 
-export default SignUp;
+export default SignUp2;
