@@ -1,4 +1,3 @@
-import './App.css';
 import { useState } from 'react';
 import Register from './pages/Register';
 import PassState from './pages/PassState';
