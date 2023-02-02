@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function Register({ setPassState }) {
+function Register({ passState, onStateChange }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -9,7 +9,6 @@ function Register({ setPassState }) {
   });
 
   const { name, email, password, confirmPassword } = formData;
-
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -20,10 +19,9 @@ function Register({ setPassState }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    onStateChange({ name: name });
   };
-	
-	
+
   return (
     <>
       <section>
@@ -62,7 +60,6 @@ function Register({ setPassState }) {
           onChange={onChange}
           placeholder='Confirm Password'
         />
-
         <button type='submit'>Submit</button>
       </form>
     </>

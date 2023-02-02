@@ -1,11 +1,10 @@
-
-function PassState(props) {
+function PassState({passState}) {
 	return (
-		<>
-			<h1>Pass State Component</h1>
-			<p>{props.name}</p>
-		</>
+	<>
+	<h1>Pass State Component</h1>
+	<p>{passState.name}</p>
+	</>
 	)
-}
-
-export default PassState
+	}
+	
+	export default PassState
