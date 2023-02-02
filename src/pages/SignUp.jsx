@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
-function Register({ passState, onStateChange }) {
+function SignUp() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    password: '',
-    confirmPassword: '',
+    urMomGay: '',
+    noU: '',
   });
 
-  const { name, email, password, confirmPassword } = formData;
+  const { name, email, urMomGay, noU } = formData;
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -19,51 +19,60 @@ function Register({ passState, onStateChange }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    onStateChange({ name: name });
+
+    if (urMomGay !== noU) {
+      alert('No uuu');
+      return;
+    }
+
+    console.log(formData);
   };
 
   return (
     <>
-      <section>
-        <h1>Register Component</h1>
-      </section>
       <form onSubmit={onSubmit}>
         <input
           type='text'
           name='name'
           id='name'
+          placeHolder='Name'
           value={name}
           onChange={onChange}
-          placeholder='Name'
+          required
         />
         <input
           type='email'
           name='email'
           id='email'
+          placeHolder='Email'
           value={email}
           onChange={onChange}
-          placeholder='Email'
+          required
         />
         <input
           type='password'
-          name='password'
-          id='password'
-          value={password}
+          name='urMomGay'
+          id='urMomGay'
+          placeHolder='Password'
+          value={urMomGay}
           onChange={onChange}
-          placeholder='Password'
+          required
         />
         <input
           type='password'
-          name='confirmPassword'
-          id='confirmPassword'
-          value={confirmPassword}
+          name='noU'
+          id='noU'
+          placeHolder='Confirm Password'
+          value={noU}
           onChange={onChange}
-          placeholder='Confirm Password'
+          required
         />
         <button type='submit'>Submit</button>
       </form>
+
+      {name.length >= 4 ? <h1>Hello, {name} </h1> : <></>}
     </>
   );
 }
 
-export default Register;
+export default SignUp;

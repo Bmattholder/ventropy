@@ -1,69 +1,69 @@
 import { useState } from 'react';
 
-function Register({ passState, onStateChange }) {
-  const [formData, setFormData] = useState({
+function SignUp2() {
+  const [formData, whateverIWant] = useState({
     name: '',
     email: '',
     password: '',
-    confirmPassword: '',
+    confirm: '',
   });
 
-  const { name, email, password, confirmPassword } = formData;
+  const { name, email, password, confirm } = formData;
 
   const onChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
+    whateverIWant((asshole) => ({
+      ...asshole,
       [e.target.name]: e.target.value,
     }));
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    onStateChange({ name: name });
+
+    console.log(formData);
   };
 
   return (
     <>
-      <section>
-        <h1>Register Component</h1>
-      </section>
       <form onSubmit={onSubmit}>
         <input
           type='text'
           name='name'
           id='name'
           value={name}
-          onChange={onChange}
           placeholder='Name'
+          onChange={onChange}
         />
         <input
-          type='email'
+          type='emai'
           name='email'
           id='email'
           value={email}
-          onChange={onChange}
           placeholder='Email'
+          onChange={onChange}
         />
         <input
           type='password'
           name='password'
           id='password'
           value={password}
-          onChange={onChange}
           placeholder='Password'
+          onChange={onChange}
         />
         <input
           type='password'
-          name='confirmPassword'
-          id='confirmPassword'
-          value={confirmPassword}
-          onChange={onChange}
+          name='confirm'
+          id='confirm'
+          value={confirm}
           placeholder='Confirm Password'
+          onChange={onChange}
         />
         <button type='submit'>Submit</button>
       </form>
+
+      {name.length >= 4 ? <h1>Sup, {name} </h1> : <></>}
     </>
   );
 }
 
-export default Register;
+export default SignUp2;
