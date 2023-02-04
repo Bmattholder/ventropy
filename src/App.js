@@ -1,24 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import DisplayName from './components/DisplayName';
+import Register from './pages/Register';
+import DisplayEmail from './components/DisplayEmail';
 
 function App() {
+  const [updateData, setUpdateData] = useState({
+    name: '',
+    email: '',
+  });
+
+  const handleStateChange = (newState) => {
+    setUpdateData(newState);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Register  onStateChange={handleStateChange} />
+      {updateData.name !== '' ? <DisplayName updateData={updateData} /> : <></> }
+      {updateData.email !== '' ? <DisplayEmail updateData={updateData} /> : <></> }
+    </>
   );
 }
 
