@@ -1,4 +1,3 @@
-import './App.css';
 import { useState } from 'react';
 import DisplayName from './components/DisplayName';
 import Register from './pages/Register';

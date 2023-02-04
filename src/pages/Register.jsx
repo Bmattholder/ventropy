@@ -22,7 +22,7 @@ function Register({  onStateChange }) {
 
     if (password !== passwordConfirmation) {
       alert("Passwords don't match...");
-      // return;
+      return;
     }
 
     onStateChange({ name: name, email: email });
