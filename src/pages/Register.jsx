@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
-function Register({ passState, onStateChange }) {
+function Register({ muhName, onStateChange }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-    confirmPassword: '',
+    passwordConfirm: '',
   });
 
-  const { name, email, password, confirmPassword } = formData;
+  const { name, email, password, passwordConfirm } = formData;
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -19,49 +19,72 @@ function Register({ passState, onStateChange }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    if (password !== passwordConfirm) {
+      alert("Passwords don't match!!");
+      return;
+    }
     onStateChange({ name: name });
+    console.log(formData);
   };
 
   return (
     <>
-      <section>
-        <h1>Register Component</h1>
+      <section className='heading'>
+        <h1>Register</h1>
       </section>
-      <form onSubmit={onSubmit}>
-        <input
-          type='text'
-          name='name'
-          id='name'
-          value={name}
-          onChange={onChange}
-          placeholder='Name'
-        />
-        <input
-          type='email'
-          name='email'
-          id='email'
-          value={email}
-          onChange={onChange}
-          placeholder='Email'
-        />
-        <input
-          type='password'
-          name='password'
-          id='password'
-          value={password}
-          onChange={onChange}
-          placeholder='Password'
-        />
-        <input
-          type='password'
-          name='confirmPassword'
-          id='confirmPassword'
-          value={confirmPassword}
-          onChange={onChange}
-          placeholder='Confirm Password'
-        />
-        <button type='submit'>Submit</button>
-      </form>
+      <section className='form'>
+        <form onSubmit={onSubmit}>
+          <div className='form-group'>
+            <input
+              type='text'
+              className='form-control'
+              id='name'
+              name='name'
+              value={name}
+              onChange={onChange}
+              placeholder='Enter Your Name'
+            />
+          </div>
+
+          <div className='form-group'>
+            <input
+              type='email'
+              className='form-control'
+              id='email'
+              name='email'
+              value={email}
+              onChange={onChange}
+              placeholder='Enter Email'
+            />
+          </div>
+          <div className='form-group'>
+            <input
+              type='password'
+              className='form-control'
+              id='password'
+              name='password'
+              value={password}
+              onChange={onChange}
+              placeholder='Password'
+            />
+          </div>
+
+          <div className='form-group'>
+            <input
+              type='password'
+              className='form-control'
+              id='passwordConfirm'
+              name='passwordConfirm'
+              value={passwordConfirm}
+              onChange={onChange}
+              placeholder='Confirm Password'
+            />
+          </div>
+
+          <button className='btn btn-block'>Submit</button>
+        </form>
+      </section>
     </>
   );
 }

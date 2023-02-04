@@ -1,21 +1,21 @@
+import './App.css';
 import { useState } from 'react';
-import Register from './pages/Register';
 import PassState from './pages/PassState';
+import Register from './pages/Register';
 
 function App() {
-  const [passState, setPassState] = useState({
+  const [muhName, setMuhName] = useState({
     name: '',
   });
 
   const handleStateChange = (newState) => {
-    setPassState(newState);
+    setMuhName(newState);
   };
 
   return (
     <div className='App'>
-      <Register passState={passState} onStateChange={handleStateChange} />
-      <br /> <br />
-      <PassState passState={passState} />
+      <Register muhName={muhName} onStateChange={handleStateChange} />
+      {muhName.name !== '' ? <PassState muhName={muhName} /> : <></>}
     </div>
   );
 }
