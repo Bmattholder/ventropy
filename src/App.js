@@ -1,23 +1,20 @@
+import './App.css';
 import { useState } from 'react';
-import DisplayName from './components/DisplayName';
 import Register from './pages/Register';
-import DisplayEmail from './components/DisplayEmail';
+import Card from './components/Card';
 
 function App() {
-  const [updateData, setUpdateData] = useState({
-    name: '',
-    email: '',
-  });
+  const [cardName, setCardName] = useState({ name: '' });
 
   const handleStateChange = (newState) => {
-    setUpdateData(newState);
-  };
+    setCardName(newState)
+  }
+
   return (
-    <>
-      <Register  onStateChange={handleStateChange} />
-      {updateData.name !== '' ? <DisplayName updateData={updateData} /> : <></> }
-      {updateData.email !== '' ? <DisplayEmail updateData={updateData} /> : <></> }
-    </>
+    <div className='App'>
+      <Register handleStateChange={handleStateChange} />
+      <Card cardName={cardName} />
+    </div>
 
   );
 }
