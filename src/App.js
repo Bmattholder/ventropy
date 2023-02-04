@@ -1,23 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import PassState from './pages/PassState';
+import Register from './pages/Register';
 
 function App() {
+  const [muhName, setMuhName] = useState({
+    name: '',
+  });
+
+  const handleStateChange = (newState) => {
+    setMuhName(newState);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <Register muhName={muhName} onStateChange={handleStateChange} />
+      {muhName.name !== '' ? <PassState muhName={muhName} /> : <></>}
     </div>
   );
 }
