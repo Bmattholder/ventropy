@@ -15,6 +15,7 @@ function App() {
       <Register handleStateChange={handleStateChange} />
       <Card cardName={cardName} />
     </div>
+
   );
 }
 
