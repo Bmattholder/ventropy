@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
-function Register({ muhName, onStateChange }) {
+function Register({  onStateChange }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-    passwordConfirm: '',
+    passwordConfirmation: '',
   });
 
-  const { name, email, password, passwordConfirm } = formData;
+  const { name, email, password, passwordConfirmation } = formData;
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -20,11 +20,12 @@ function Register({ muhName, onStateChange }) {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (password !== passwordConfirm) {
-      alert("Passwords don't match!!");
-      return;
+    if (password !== passwordConfirmation) {
+      alert("Passwords don't match...");
+      // return;
     }
-    onStateChange({ name: name });
+
+    onStateChange({ name: name, email: email });
     console.log(formData);
   };
 
@@ -43,10 +44,10 @@ function Register({ muhName, onStateChange }) {
               name='name'
               value={name}
               onChange={onChange}
-              placeholder='Enter Your Name'
+              placeholder='UrMomGay'
+              required
             />
           </div>
-
           <div className='form-group'>
             <input
               type='email'
@@ -55,7 +56,8 @@ function Register({ muhName, onStateChange }) {
               name='email'
               value={email}
               onChange={onChange}
-              placeholder='Enter Email'
+              placeholder='noU'
+              required
             />
           </div>
           <div className='form-group'>
@@ -64,27 +66,33 @@ function Register({ muhName, onStateChange }) {
               className='form-control'
               id='password'
               name='password'
+              minLength={4}
               value={password}
               onChange={onChange}
-              placeholder='Password'
+              required
             />
           </div>
-
           <div className='form-group'>
             <input
               type='password'
               className='form-control'
-              id='passwordConfirm'
-              name='passwordConfirm'
-              value={passwordConfirm}
+              id='passwordConfirmation'
+              name='passwordConfirmation'
+              value={passwordConfirmation}
               onChange={onChange}
-              placeholder='Confirm Password'
+              required
             />
           </div>
-
-          <button className='btn btn-block'>Submit</button>
+          <div className='form-group'>
+            <button className='btn btn-block'>Submit</button>
+          </div>
         </form>
       </section>
+      {password.length >= 4 ? (
+        <h1>Your password is: {password} ...lol</h1>
+      ) : (
+        <></>
+      )}
     </>
   );
 }
