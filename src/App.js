@@ -19,6 +19,7 @@ function App() {
       {updateData.name !== '' ? <DisplayName updateData={updateData} /> : <></> }
       {updateData.email !== '' ? <DisplayEmail updateData={updateData} /> : <></> }
     </>
+
   );
 }
 
