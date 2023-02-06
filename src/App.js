@@ -9,7 +9,7 @@ function App() {
   });
 
   const onStateChange = (newState) => {
-  setState(newState);
+    setState(newState);
   };
 
   return (
