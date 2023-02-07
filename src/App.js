@@ -1,21 +1,33 @@
-import './App.css';
 import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Home from './pages/Home';
 import Register from './pages/Register';
-import Card from './components/Card';
 
 function App() {
-  const [cardName, setCardName] = useState({ name: '' });
+  const [passName, setPassName] = useState({
+    name: '',
+  });
 
-  const handleStateChange = (newState) => {
-    setCardName(newState)
-  }
+  const onStateChange = (newState) => {
+    setPassName(newState);
+  };
 
   return (
-    <div className='App'>
-      <Register handleStateChange={handleStateChange} />
-      <Card cardName={cardName} />
-    </div>
-
+    <>
+      <Router>
+        <div className='container'>
+          <Header />
+          <Routes>
+            <Route path='/' element={<Home passName={passName} />} />
+            <Route
+              path='/register'
+              element={<Register onStateChange={onStateChange} />}
+            />
+          </Routes>
+        </div>
+      </Router>
+    </>
   );
 }
 

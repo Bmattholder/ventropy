@@ -1,6 +1,9 @@
+import React from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-function Register({handleStateChange}) {
+function Register({ onStateChange }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -10,6 +13,8 @@ function Register({handleStateChange}) {
 
   const { name, email, password, passwordConfirm } = formData;
 
+  const navigate = useNavigate();
+
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -17,15 +22,27 @@ function Register({handleStateChange}) {
     }));
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+
     if (password !== passwordConfirm) {
-      alert("Passwords don't match");
-      return;
-    } else {
-      console.log(formData);
-			handleStateChange({name: name})
-    }
+			alert("Passwords don't match");
+		} else {
+			try {
+				const response = await axios.post(
+					'http://localhost:8000/register',
+					{ name, email, password }
+				);
+				const token = response.data;
+				console.log('token: ', token);
+				localStorage.setItem('token', token);
+				onStateChange({ name: name });
+				navigate('/');
+			} catch (error) {
+				console.error(error);
+				alert(error.message);
+			}
+		}
   };
 
   return (
@@ -33,7 +50,6 @@ function Register({handleStateChange}) {
       <section className='heading'>
         <h1>Register</h1>
       </section>
-
       <section className='form'>
         <form onSubmit={onSubmit}>
           <div className='form-group'>
@@ -44,7 +60,7 @@ function Register({handleStateChange}) {
               name='name'
               value={name}
               onChange={onChange}
-              placeholder='Name'
+              placeholder='Enter Name'
               minLength={2}
               required
             />
@@ -52,39 +68,38 @@ function Register({handleStateChange}) {
           <div className='form-group'>
             <input
               type='email'
-              placeholder='Email'
               className='form-control'
               id='email'
               name='email'
               value={email}
               onChange={onChange}
-              minLength={2}
+              placeholder='Enter Email'
               required
             />
           </div>
           <div className='form-group'>
             <input
               type='password'
-              placeholder='Password'
               className='form-control'
               id='password'
               name='password'
               value={password}
               onChange={onChange}
-              minLength={2}
+              placeholder='Enter Password'
+              minLength={4}
               required
             />
           </div>
           <div className='form-group'>
             <input
               type='password'
-              placeholder='Confirm Password'
               className='form-control'
               id='passwordConfirm'
               name='passwordConfirm'
               value={passwordConfirm}
               onChange={onChange}
-              minLength={2}
+              placeholder='Confirm Password'
+              minLength={4}
               required
             />
           </div>
