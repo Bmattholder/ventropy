@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import Header from '../components/Header';
 
 function Register({ onStateChange }) {
   const [formData, setFormData] = useState({
@@ -7,8 +10,11 @@ function Register({ onStateChange }) {
     password: '',
     passwordConfirm: '',
   });
+  const [error, setError] = useState(null);
 
   const { name, email, password, passwordConfirm } = formData;
+
+  const navigate = useNavigate();
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -17,18 +23,35 @@ function Register({ onStateChange }) {
     }));
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (password !== passwordConfirm) {
       alert("Passwords don't match");
     } else {
-      onStateChange({name: name});
-      console.log(formData);
+      try {
+        const response = await axios.post(
+          'http://localhost:8000/register',
+          { name, email, password }
+        );
+        const token = response.data.token;
+        localStorage.setItem('token', token);
+        console.log('token: ', token);
+
+        onStateChange({ name: name });
+        if (token) {
+          navigate('/');
+        }
+      } catch (error) {
+        setError(error.message);
+        console.error(error);
+        alert(error.message);
+      }
     }
   };
 
   return (
     <>
+      <Header />
       <section className='heading'>Register</section>
       <section className='form'>
         <form onSubmit={onSubmit}>
