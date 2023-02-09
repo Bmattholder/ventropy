@@ -1,11 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-function Home({passName}) {
-	return (
-		<>
-		<h1>Hello, {passName.name}</h1>
-		</>
-	)
+function Home({ state }) {
+  return <h1>Hello, {state.name}</h1>;
 }
 
-export default Home
+export default Home;
