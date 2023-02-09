@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useState } from 'react';
+
+import Home from './pages/Home';
+import Header from './components/Header';
+import Register from './pages/Register';
 
 function App() {
+  const [state, setState] = useState({
+    name: '',
+  });
+
+  const onStateChange = (newState) => {
+    setState(newState);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <div className='container'>
+          <Header />
+          <Routes>
+            <Route path='/' element={<Home state={state} />} />
+            <Route
+              path='/register'
+              element={<Register onStateChange={onStateChange} />}
+            />
+          </Routes>
+        </div>
+      </Router>
+    </>
   );
 }
 
