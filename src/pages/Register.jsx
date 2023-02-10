@@ -5,13 +5,14 @@ import axios from 'axios';
 
 function Register({ onStateChange }) {
   const [ formData, setFormData ] = useState({
+
     name: '',
     email: '',
     password: '',
     confirmPassword: '',
   });
 
-  const {name, email, password, confirmPassword} = formData;
+  const { name, email, password, confirmPassword } = formData;
 
   const navigate = useNavigate();
 
@@ -23,6 +24,7 @@ function Register({ onStateChange }) {
   };
 
   const onSubmit = async (e) => {
+
     e.preventDefault();
 
     if (password !== confirmPassword) {
@@ -46,6 +48,7 @@ function Register({ onStateChange }) {
       }
     }
   };
+
 
   return (
     <>
@@ -77,6 +80,7 @@ function Register({ onStateChange }) {
               onChange={onChange}
 							placeholder='Enter your email'
 							required
+
             />
           </div>
           <div className='form-group'>
