@@ -3,17 +3,17 @@ import { Link } from 'react-router-dom';
 
 function Header() {
   return (
-      <header className='header'>
-        <div className='logo'>
-          <Link to='/'>Home</Link>
-        </div>
-        <ul>
-          <li>
-            <Link to='/register'>Register</Link>
-          </li>
-        </ul>
-      </header>
-
+    <div className='header'>
+      <Link to='/'>Home</Link>
+      <ul>
+        <li>
+          <Link to='/register'>Register</Link>
+        </li>
+        <li>
+          <Link to='/login'>Login</Link>
+        </li>
+      </ul>
+    </div>
   );
 }
 

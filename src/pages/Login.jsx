@@ -3,32 +3,28 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function Register({ onStateChange }) {
-  const [ formData, setFormData ] = useState({
-
-    name: '',
+function Login({ onStateChange }) {
+  const [ loginFormData, setLoginFormData ] = useState({
     email: '',
     password: '',
-    confirmPassword: '',
   });
 
-  const { name, email, password, confirmPassword } = formData;
+  const {name, email, password} = loginFormData;
 
   const navigate = useNavigate();
 
   const onChange = (e) => {
-    setFormData((prevState) => ({
+    setLoginFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
   };
 
   const onSubmit = async (e) => {
-
     e.preventDefault();
 
-    if (password !== confirmPassword) {
-      alert("Passwords don't match");
+    if (password.length < 3) {
+      alert("Password isn't long enough");
       return;
     } else {
       try {
@@ -41,35 +37,21 @@ function Register({ onStateChange }) {
         console.log('token: ', token);
 				localStorage.setItem('token', token);
         onStateChange({ name: name, token: token });
-        console.log(formData);
-        navigate('/');
+        console.log(loginFormData);
+        navigate('/account');
       } catch (error) {
         console.log(error);
       }
     }
   };
 
-
   return (
     <>
       <section className='heading'>
-        <h1>Register</h1>
+        <h1>Login</h1>
       </section>
       <section className='form'>
         <form onSubmit={onSubmit}>
-          <div className='form-group'>
-            <input
-              type='text'
-              className='form-control'
-              id='name'
-							name='name'
-							value={name}
-              onChange={onChange}
-							minLength={2}
-							placeholder='Enter your name'
-							required
-            />
-          </div>
           <div className='form-group'>
             <input
               type='email'
@@ -80,7 +62,6 @@ function Register({ onStateChange }) {
               onChange={onChange}
 							placeholder='Enter your email'
 							required
-
             />
           </div>
           <div className='form-group'>
@@ -96,19 +77,6 @@ function Register({ onStateChange }) {
 							required
             />
           </div>
-          <div className='form-group'>
-            <input
-              type='password'
-              className='form-control'
-              id='confirmPassword'
-							name='confirmPassword'
-							value={confirmPassword}
-              onChange={onChange}
-							minLength={4}
-							placeholder='Confirm your password'
-							required
-            />
-          </div>
           <button className='btn btn-block'>Submit</button>
         </form>
       </section>
@@ -116,4 +84,4 @@ function Register({ onStateChange }) {
   );
 }
 
-export default Register;
+export default Login;

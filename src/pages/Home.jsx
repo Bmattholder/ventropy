@@ -1,14 +1,15 @@
-import React from 'react';
+import React from 'react'
 
-function Home({ state }) {
-	const {name, token} = state
-	const shortenedToken = (token.token + "").substring(0, 16) + "...";
-  return (
-    <>
-      <h1>Hello, {name}</h1>
-      <h2>Token: {shortenedToken}</h2>
-    </>
-  );
+function Home({state}) {
+
+	if(state.name !== ''){
+		return (
+			<h1>Hello, {state.name}</h1>
+	)
+	} else {
+		return <h2>Nothing to see here</h2>
+	}
+	
 }
 
-export default Home;
+export default Home
