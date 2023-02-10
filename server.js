@@ -13,6 +13,7 @@ app.post('/register', (req, res) => {
 
   const token = jwt.sign({ user }, 'secretkey', { expiresIn: '1hr' });
 
+
   res.status(200).send({
     token: token,
   });
@@ -21,3 +22,4 @@ app.post('/register', (req, res) => {
 app.listen(port, () => {
   console.log(`The server is running on port ${port}`)
 });
+

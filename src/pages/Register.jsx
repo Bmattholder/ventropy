@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+
 function Register({ onStateChange }) {
   const [formData, setFormData] = useState({
     name: '',
@@ -24,6 +25,7 @@ function Register({ onStateChange }) {
 
   const  onSubmit = async (e) => {
     e.preventDefault();
+
     if (password !== confirmPassword) {
       alert("Passwords don't match");
       return;
@@ -44,6 +46,7 @@ function Register({ onStateChange }) {
 
     }
   };
+
 
   return (
     <>

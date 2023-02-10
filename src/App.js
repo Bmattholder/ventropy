@@ -7,6 +7,7 @@ import Register from './pages/Register';
 function App() {
   const [state, setState] = useState({ name: '', token: '' });
 
+
   const onStateChange = (newState) => {
     setState(newState);
   };
