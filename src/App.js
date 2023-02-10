@@ -1,14 +1,12 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
-
-import Home from './pages/Home';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
+import Home from './pages/Home';
 import Register from './pages/Register';
 
 function App() {
-  const [state, setState] = useState({
-    name: '',
-  });
+  const [state, setState] = useState({ name: '', token: '' });
+
 
   const onStateChange = (newState) => {
     setState(newState);
@@ -16,8 +14,8 @@ function App() {
 
   return (
     <>
-      <Router>
-        <div className='container'>
+      <div className='container'>
+        <Router>
           <Header />
           <Routes>
             <Route path='/' element={<Home state={state} />} />
@@ -26,8 +24,8 @@ function App() {
               element={<Register onStateChange={onStateChange} />}
             />
           </Routes>
-        </div>
-      </Router>
+        </Router>
+      </div>
     </>
   );
 }

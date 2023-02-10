@@ -11,7 +11,7 @@ app.use(cors({ origin: 'http://localhost:3000' }));
 app.post('/register', (req, res) => {
   const user = req.body;
 
-  const token = jwt.sign({ user }, 'secretkey', { expiresIn: '1h' });
+  const token = jwt.sign({ user }, 'secretkey', { expiresIn: '1hr' });
 
 
   res.status(200).send({
@@ -20,6 +20,6 @@ app.post('/register', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server started on port ${port}`);
+  console.log(`The server is running on port ${port}`)
 });
 
