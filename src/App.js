@@ -24,7 +24,7 @@ function App() {
           <Route path='/' element={<Home state={state} />} />
           <Route
             path='/register'
-            element={<Register onStateChange={onStateChange} />}
+            element={<Register onStateChange={onStateChange} />} 
           />
           <Route
             path='/login'
