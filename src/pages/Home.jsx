@@ -1,15 +1,45 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateToken, updateName } from '../features/token/tokenSlice';
 
-function Home({state}) {
+function Home() {
+  const name = useSelector((state) => state.token.name);
+  const tokenString = useSelector((state) => state.token.token);
 
-	if(state.name !== ''){
-		return (
-			<h1>Hello, {state.name}</h1>
-	)
-	} else {
-		return <h2>Nothing to see here</h2>
-	}
-	
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      try {
+        const parsedToken = JSON.parse(storedToken);
+        dispatch(updateToken(parsedToken));
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    const storedName = localStorage.getItem('name');
+    if (storedName) {
+      dispatch(updateName(storedName));
+    }
+  }, [dispatch]);
+
+  let tokenValue;
+  let shortenedToken = 'No token';
+  if (tokenString && typeof tokenString === 'object' && tokenString.token) {
+    tokenValue = tokenString.token;
+    if (tokenValue) {
+      shortenedToken = `${tokenValue.substring(0, 15)}...`;
+    }
+  }
+
+  return (
+    <div>
+      <h1>Welcome, {name}!</h1>
+      <p>Token: {shortenedToken}</p>
+    </div>
+  );
 }
 
-export default Home
+export default Home;

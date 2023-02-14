@@ -1,11 +1,12 @@
-import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { updateToken, updateName } from '../features/token/tokenSlice';
 import axios from 'axios';
+
 
 function Register({ onStateChange }) {
   const [ formData, setFormData ] = useState({
-
     name: '',
     email: '',
     password: '',
@@ -15,6 +16,7 @@ function Register({ onStateChange }) {
   const { name, email, password, confirmPassword } = formData;
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -26,7 +28,6 @@ function Register({ onStateChange }) {
   const onSubmit = async (e) => {
 
     e.preventDefault();
-
     if (password !== confirmPassword) {
       alert("Passwords don't match");
       return;
@@ -37,10 +38,18 @@ function Register({ onStateChange }) {
           email,
           password,
         });
-        let token = response.data;
-        console.log('token: ', token);
-				localStorage.setItem('token', token);
-        onStateChange({ name: name, token: token });
+        const token = response.data;
+        const handleTokenReceived = (token) => {
+          dispatch(updateToken(token));
+        };
+				const handleName = (name) => {
+					dispatch(updateName(name))
+					localStorage.setItem('name', name);
+				}
+        handleTokenReceived(token);
+        handleName(name);
+				console.log('token: ', token);
+        localStorage.setItem('token', JSON.stringify(token));
         console.log(formData);
         navigate('/');
       } catch (error) {
@@ -55,63 +64,62 @@ function Register({ onStateChange }) {
       <section className='heading'>
         <h1>Register</h1>
       </section>
-      <section className='form'>
+      <div className='form'>
         <form onSubmit={onSubmit}>
           <div className='form-group'>
             <input
               type='text'
               className='form-control'
+              name='name'
               id='name'
-							name='name'
-							value={name}
+              value={name}
               onChange={onChange}
-							minLength={2}
-							placeholder='Enter your name'
-							required
+              placeholder='Enter your name'
+              minLength={2}
+              required
             />
           </div>
           <div className='form-group'>
             <input
               type='email'
               className='form-control'
+              name='email'
               id='email'
-							name='email'
-							value={email}
+              value={email}
               onChange={onChange}
-							placeholder='Enter your email'
-							required
-
+              placeholder='Enter your email'
+              required
             />
           </div>
           <div className='form-group'>
             <input
               type='password'
               className='form-control'
+              name='password'
               id='password'
-							name='password'
-							value={password}
+              value={password}
               onChange={onChange}
-							minLength={4}
-							placeholder='Enter your password'
-							required
+              placeholder='Enter your password'
+              minLength={4}
+              required
             />
           </div>
           <div className='form-group'>
             <input
               type='password'
               className='form-control'
+              name='confirmPassword'
               id='confirmPassword'
-							name='confirmPassword'
-							value={confirmPassword}
+              value={confirmPassword}
               onChange={onChange}
-							minLength={4}
-							placeholder='Confirm your password'
-							required
+              placeholder='Confirm your password'
+              minLength={4}
+              required
             />
           </div>
           <button className='btn btn-block'>Submit</button>
         </form>
-      </section>
+      </div>
     </>
   );
 }
