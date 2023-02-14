@@ -4,8 +4,9 @@ import { useDispatch } from 'react-redux';
 import { updateToken, updateName } from '../features/token/tokenSlice';
 import axios from 'axios';
 
-function Register() {
-  const [formData, setFormData] = useState({
+
+function Register({ onStateChange }) {
+  const [ formData, setFormData ] = useState({
     name: '',
     email: '',
     password: '',
@@ -25,6 +26,7 @@ function Register() {
   };
 
   const onSubmit = async (e) => {
+
     e.preventDefault();
     if (password !== confirmPassword) {
       alert("Passwords don't match");
@@ -55,6 +57,7 @@ function Register() {
       }
     }
   };
+
 
   return (
     <>
