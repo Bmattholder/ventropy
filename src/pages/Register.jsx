@@ -5,7 +5,7 @@ import { updateToken, updateName } from '../features/token/tokenSlice';
 import axios from 'axios';
 
 
-function Register({ onStateChange }) {
+function Register() {
   const [ formData, setFormData ] = useState({
     name: '',
     email: '',
