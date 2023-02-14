@@ -1,9 +1,12 @@
-import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { updateToken, updateName } from '../features/token/tokenSlice';
+import axios from 'axios';
+
 
 function Register() {
-  const [formData, setFormData] = useState({
+  const [ formData, setFormData ] = useState({
     name: '',
     email: '',
     password: '',
@@ -13,6 +16,7 @@ function Register() {
   const { name, email, password, confirmPassword } = formData;
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -21,13 +25,31 @@ function Register() {
     }));
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
+
     e.preventDefault();
     if (password !== confirmPassword) {
       alert("Passwords don't match");
       return;
     } else {
       try {
+        const response = await axios.post('http://localhost:8000/register', {
+          name,
+          email,
+          password,
+        });
+        const token = response.data;
+        const handleTokenReceived = (token) => {
+          dispatch(updateToken(token));
+        };
+				const handleName = (name) => {
+					dispatch(updateName(name))
+					localStorage.setItem('name', name);
+				}
+        handleTokenReceived(token);
+        handleName(name);
+				console.log('token: ', token);
+        localStorage.setItem('token', JSON.stringify(token));
         console.log(formData);
         navigate('/');
       } catch (error) {
@@ -41,16 +63,16 @@ function Register() {
       <section className='heading'>
         <h1>Register</h1>
       </section>
-      <section className='form'>
+      <div className='form'>
         <form onSubmit={onSubmit}>
           <div className='form-group'>
             <input
               type='text'
-              id='name'
+              className='form-control'
               name='name'
+              id='name'
               value={name}
               onChange={onChange}
-              className='form-control'
               placeholder='Enter your name'
               minLength={2}
               required
@@ -59,11 +81,11 @@ function Register() {
           <div className='form-group'>
             <input
               type='email'
-              id='email'
+              className='form-control'
               name='email'
+              id='email'
               value={email}
               onChange={onChange}
-              className='form-control'
               placeholder='Enter your email'
               required
             />
@@ -71,11 +93,11 @@ function Register() {
           <div className='form-group'>
             <input
               type='password'
-              id='password'
+              className='form-control'
               name='password'
+              id='password'
               value={password}
               onChange={onChange}
-              className='form-control'
               placeholder='Enter your password'
               minLength={4}
               required
@@ -84,11 +106,11 @@ function Register() {
           <div className='form-group'>
             <input
               type='password'
-              id='confirmPassword'
+              className='form-control'
               name='confirmPassword'
+              id='confirmPassword'
               value={confirmPassword}
               onChange={onChange}
-              className='form-control'
               placeholder='Confirm your password'
               minLength={4}
               required
@@ -96,7 +118,8 @@ function Register() {
           </div>
           <button className='btn btn-block'>Submit</button>
         </form>
-      </section>
+
+      </div>
     </>
   );
 }
