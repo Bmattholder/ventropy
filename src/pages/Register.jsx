@@ -58,7 +58,6 @@ function Register() {
     }
   };
 
-
   return (
     <>
       <section className='heading'>
@@ -119,6 +118,7 @@ function Register() {
           </div>
           <button className='btn btn-block'>Submit</button>
         </form>
+
       </div>
     </>
   );
