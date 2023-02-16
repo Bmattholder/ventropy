@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateToken, updateName } from '../features/token/tokenSlice';
+import { updateToken, updateName } from '../features/auth/authSlice';
 
 function Home() {
   const name = useSelector((state) => state.token.name);
@@ -15,7 +15,7 @@ function Home() {
         const parsedToken = JSON.parse(storedToken);
         dispatch(updateToken(parsedToken));
       } catch (error) {
-        console.error(error);
+        console.log(error);
       }
     }
 
@@ -35,10 +35,11 @@ function Home() {
   }
 
   return (
-    <div>
+    <>
+      <div className='heading'>Home</div>
       <h1>Welcome, {name}!</h1>
       <p>Token: {shortenedToken}</p>
-    </div>
+    </>
   );
 }
 

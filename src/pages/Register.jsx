@@ -1,12 +1,13 @@
+import React from 'react';
+import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { updateToken, updateName } from '../features/token/tokenSlice';
-import axios from 'axios';
-
+import { updateToken, updateName } from '../features/auth/authSlice';
 
 function Register() {
-  const [ formData, setFormData ] = useState({
+  const [formData, setFormData] = useState({
+
     name: '',
     email: '',
     password: '',
@@ -26,8 +27,8 @@ function Register() {
   };
 
   const onSubmit = async (e) => {
-
     e.preventDefault();
+
     if (password !== confirmPassword) {
       alert("Passwords don't match");
       return;
@@ -41,16 +42,19 @@ function Register() {
         const token = response.data;
         const handleTokenReceived = (token) => {
           dispatch(updateToken(token));
+          localStorage.setItem('token', JSON.stringify(token));
         };
-				const handleName = (name) => {
-					dispatch(updateName(name))
-					localStorage.setItem('name', name);
-				}
+        const handleName = (name) => {
+          dispatch(updateName(name));
+          localStorage.setItem('name', name);
+        };
+        
         handleTokenReceived(token);
         handleName(name);
-				console.log('token: ', token);
-        localStorage.setItem('token', JSON.stringify(token));
+        
         console.log(formData);
+        console.log('token: ', token);
+
         navigate('/');
       } catch (error) {
         console.log(error);
@@ -60,9 +64,7 @@ function Register() {
 
   return (
     <>
-      <section className='heading'>
-        <h1>Register</h1>
-      </section>
+      <section className='heading'>Register</section>
       <div className='form'>
         <form onSubmit={onSubmit}>
           <div className='form-group'>
@@ -73,7 +75,7 @@ function Register() {
               id='name'
               value={name}
               onChange={onChange}
-              placeholder='Enter your name'
+              placeholder='Enter your Name'
               minLength={2}
               required
             />
@@ -118,7 +120,6 @@ function Register() {
           </div>
           <button className='btn btn-block'>Submit</button>
         </form>
-
       </div>
     </>
   );

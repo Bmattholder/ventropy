@@ -5,7 +5,6 @@ const cors = require('cors');
 const app = express();
 const port = 8000;
 
-
 app.use(express.json());
 app.use(cors({ origin: 'http://localhost:3000' }));
 
@@ -20,5 +19,5 @@ app.post('/register', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`The server is running on port ${port}`);
+  console.log(`Server has started on port ${port}`);
 });
