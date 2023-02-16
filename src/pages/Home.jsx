@@ -37,7 +37,7 @@ function Home() {
   return (
     <>
       <div className='heading'>Home</div>
-      <p>Hello, {name}</p>
+      <h1>Welcome, {name}!</h1>
       <p>Token: {shortenedToken}</p>
     </>
   );

@@ -7,6 +7,7 @@ import { updateToken, updateName } from '../features/auth/authSlice';
 
 function Register() {
   const [formData, setFormData] = useState({
+
     name: '',
     email: '',
     password: '',
@@ -47,10 +48,13 @@ function Register() {
           dispatch(updateName(name));
           localStorage.setItem('name', name);
         };
+        
         handleTokenReceived(token);
         handleName(name);
+        
         console.log(formData);
         console.log('token: ', token);
+
         navigate('/');
       } catch (error) {
         console.log(error);
