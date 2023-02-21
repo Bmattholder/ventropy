@@ -7,14 +7,13 @@ import { updateToken, updateName } from '../features/auth/authSlice';
 
 function Register() {
   const [formData, setFormData] = useState({
-
     name: '',
     email: '',
     password: '',
-    confirmPassword: '',
+    password2: '',
   });
 
-  const { name, email, password, confirmPassword } = formData;
+  const { name, email, password, password2 } = formData;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -29,7 +28,7 @@ function Register() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
+    if (password !== password2) {
       alert("Passwords don't match");
       return;
     } else {
@@ -48,10 +47,10 @@ function Register() {
           dispatch(updateName(name));
           localStorage.setItem('name', name);
         };
-        
+
         handleTokenReceived(token);
         handleName(name);
-        
+
         console.log(formData);
         console.log('token: ', token);
 
@@ -75,7 +74,7 @@ function Register() {
               id='name'
               value={name}
               onChange={onChange}
-              placeholder='Enter your Name'
+              placeholder='Enter your name'
               minLength={2}
               required
             />
@@ -109,9 +108,9 @@ function Register() {
             <input
               type='password'
               className='form-control'
-              name='confirmPassword'
-              id='confirmPassword'
-              value={confirmPassword}
+              name='password2'
+              id='password2'
+              value={password2}
               onChange={onChange}
               placeholder='Confirm your password'
               minLength={4}
