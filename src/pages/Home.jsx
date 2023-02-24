@@ -18,6 +18,7 @@ function Home() {
         console.log(error);
       }
     }
+
     const storedName = localStorage.getItem('name');
     if (storedName) {
       dispatch(updateName(storedName));

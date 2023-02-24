@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React from 'react';
+import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -42,7 +42,6 @@ function Register() {
           dispatch(updateToken(token));
           localStorage.setItem('token', JSON.stringify(token));
         };
-
         const handleName = (name) => {
           dispatch(updateName(name));
           localStorage.setItem('name', name);
