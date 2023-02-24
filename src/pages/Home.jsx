@@ -34,13 +34,17 @@ function Home() {
     }
   }
 
-  return (
-    <>
-      <div className='heading'>Home</div>
-      <h1>Welcome, {name}!</h1>
-      <p>Token: {shortenedToken}</p>
-    </>
-  );
+  if (name === '') {
+    return <h1>Welcome, please register</h1>;
+  } else {
+    return (
+      <>
+        <div className='heading'>Home</div>
+        <h1>Welcome, {name}!</h1>
+        <p>Token: {shortenedToken}</p>
+      </>
+    );
+  }
 }
 
 export default Home;

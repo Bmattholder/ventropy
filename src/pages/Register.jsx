@@ -30,7 +30,6 @@ function Register() {
 
     if (password !== password2) {
       alert("Passwords don't match");
-      return;
     } else {
       try {
         const response = await axios.post('http://localhost:8000/register', {
@@ -70,8 +69,8 @@ function Register() {
             <input
               type='text'
               className='form-control'
-              name='name'
               id='name'
+              name='name'
               value={name}
               onChange={onChange}
               placeholder='Enter your name'
@@ -83,8 +82,8 @@ function Register() {
             <input
               type='email'
               className='form-control'
-              name='email'
               id='email'
+              name='email'
               value={email}
               onChange={onChange}
               placeholder='Enter your email'
@@ -95,8 +94,8 @@ function Register() {
             <input
               type='password'
               className='form-control'
-              name='password'
               id='password'
+              name='password'
               value={password}
               onChange={onChange}
               placeholder='Enter your password'
@@ -108,8 +107,8 @@ function Register() {
             <input
               type='password'
               className='form-control'
-              name='password2'
               id='password2'
+              name='password2'
               value={password2}
               onChange={onChange}
               placeholder='Confirm your password'
