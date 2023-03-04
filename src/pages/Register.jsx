@@ -56,7 +56,7 @@ function Register() {
         console.log(error);
       }
     }
-  }
+  };
 
   return (
     <>

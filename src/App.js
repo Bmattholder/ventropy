@@ -15,9 +15,11 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/weather-location' element={<WeatherLocation />} />
           <Route path='/to-do' element={<TodoList/>} />
+
         </Routes>
       </Router>
     </div>
+
   );
 }
 

@@ -33,6 +33,7 @@ function Home() {
       shortenedToken = `${tokenValue.substring(0, 15)}...`;
     }
   }
+
   if (name === '') {
     return <h1>Welcome, please register</h1>;
   } else {
