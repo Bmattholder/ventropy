@@ -1,4 +1,3 @@
-import React from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -15,21 +14,20 @@ function Register() {
 
   const { name, email, password, password2 } = formData;
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const onChange = (e) => {
+  function onChange(e) {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-  };
+  }
 
-  const onSubmit = async (e) => {
+  async function onSubmit(e) {
     e.preventDefault();
-
     if (password !== password2) {
-      alert("Passwords don't match");
+      alert("Passowrds don't match");
     } else {
       try {
         const response = await axios.post('http://localhost:8000/register', {
@@ -87,6 +85,7 @@ function Register() {
               value={email}
               onChange={onChange}
               placeholder='Enter your email'
+              minLength={2}
               required
             />
           </div>

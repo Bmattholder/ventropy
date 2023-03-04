@@ -19,5 +19,5 @@ app.post('/register', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server has started on port ${port}`);
+  console.log(`The server has started on port ${port}`);
 });
